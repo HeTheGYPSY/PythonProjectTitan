@@ -17,7 +17,7 @@ class Personal:
 
     @classmethod
     def to_int(cls):
-        no = str(input("Enter the bit-string to convert: "))
+        no = str(input("Enter the bit-string to convert(1s and 0s): "))
         try:
             if "." not in list(no):
                 print("Commencing computation")

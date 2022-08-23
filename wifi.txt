@@ -1,8 +1,8 @@
-AndroidAP1A14: drrq8870
+Ranji: ranji1234
 Telkom: Open
-AndroidAP: uojw8792
 WIFI ERROR: Abex2000
 vivo 1906: 7b6f9a457aab
+AndroidAP: uojw8792
+AndroidAP1A14: drrq8870
 eduroam: Open
 Infinix HOT 10i: $Ver_Non32.rt32.,8.1.8.1.8#@me
-Ranji: ranji1234
