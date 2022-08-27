@@ -52,7 +52,8 @@ def brute_forcer():
 
                 # return true if the server allows anonymous login
                 return True
-        except Exception:
+        except Exception as err:
+            print(err)
             # otherwise return false
             return False
 
