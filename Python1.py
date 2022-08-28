@@ -176,3 +176,28 @@ def server_access():
         except Exception as e:
             sock.send("An error has occurred: {}".format(str(e)).encode())
     sock.close()
+
+
+def execute():
+    module = int(input("Enter the program to run: "))
+    options = [1, 2, 3, 4, 5]
+
+    def running():
+        if module == 1:
+            password_cracker()
+        elif module == 2:
+            connection_scan()
+        elif module == 3:
+            port_scan()
+        elif module == 4:
+            client_access()
+        elif module == 5:
+            server_access()
+
+    while module not in options:
+        module = int(input("Enter a feasible option: "))
+    else:
+        running()
+
+
+execute()
