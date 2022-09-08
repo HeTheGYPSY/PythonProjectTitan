@@ -15,10 +15,11 @@ to = []
 count = 0
 while count < 10:
     recipient = str(input("Enter a recipient's address: "))
-    if recipient != "None":
+    if recipient != "":
         to.append(recipient)
+        count += 1
     else:
-        print(f"list completed successfully. Sending to:\n{to}")
+        print(f"list completed successfully. Sending to:\n{to}\n...")
         break
 else:
     print(f"list completed successfully. Sending to:\n{to}")
@@ -26,7 +27,10 @@ smtp = smtplib.SMTP('smtp.gmail.com', 587)
 smtp.ehlo()
 smtp.starttls()
 
-smtp.login(email, password)  # Login with your email and password
+try:
+    smtp.login(email, password)  # Login with your email and password
+except Exception as error:
+    print(error)
 
 
 # send our email message 'msg' to our boss
@@ -59,9 +63,10 @@ def message(img=None, attachment=None):
 
 
 message()
-
-for address in to:  # Provide some data to the sendmail function!
-    smtp.sendmail(from_addr=email, to_addrs=address, msg=msg)
-
-# Finally, don't forget to close the connection
-smtp.quit()
+try:
+    for address in to:  # Provide some data to the sendmail function!
+        smtp.sendmail(from_addr=email, to_addrs=address, msg=msg)
+except Exception as e:
+    print(e)
+finally:
+    smtp.quit()  # Finally, don't forget to close the connection
