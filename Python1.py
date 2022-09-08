@@ -1,16 +1,21 @@
-import threading
-import argparse
-import hashlib
 import os
 import socket
+import hashlib
+import argparse
+import threading
 
 
 def password_cracker():
     print("**************PASSWORD CRACKER ******************")
     pass_found = 0  # To check if the password  found or not
     input_hash = input("Enter the hashed password: ")
-    pass_doc = input("\nEnter passwords filename including path(root / home/): ")
-    if os.access(pass_doc, os.R_OK) is True:
+    directory = str(input("Enter the directory where the hashed password will be stored: "))
+    options = []
+    for doc in os.listdir(directory):
+        new = directory + doc
+        if os.access(new, os.R_OK) is True:
+            options.append(new)
+    for pass_doc in options:
         try:
             pass_file = open(pass_doc, 'r')
 
@@ -26,8 +31,9 @@ def password_cracker():
             if not pass_found:
                 print("Password is not found in the", pass_doc, "file")
                 print('\n')
+
             print("*****************  Thank you  **********************")
-        except PermissionError as error:
+        except Exception as error:
             print(error)
 
 
