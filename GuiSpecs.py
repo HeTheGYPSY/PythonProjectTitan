@@ -4,7 +4,7 @@ from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
-
+print("--MAKE SURE YOUR E-MAIL ACCOUNT DOES NOT REQUIRE TWO-FACTOR AUTHENTICATION!--")
 # initialize connection to our email server
 email = str(input("Enter your email address: "))
 password = str(input("Enter your password: "))
@@ -23,7 +23,7 @@ while count < 10:
         break
 else:
     print(f"list completed successfully. Sending to:\n{to}")
-smtp = smtplib.SMTP('smtp.gmail.com', 587)
+smtp = smtplib.SMTP('Smtp.mail.yahoo.com', 587)
 smtp.ehlo()
 smtp.starttls()
 
