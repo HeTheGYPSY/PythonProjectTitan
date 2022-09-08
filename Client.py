@@ -29,7 +29,7 @@ while True:
         client.send(command)
         data = client.recv(1024).decode("utf-8")
         if data == "exit":
-            print("Terminating connection", addr[0])
+            print(f"Terminating connection {addr[0]}")
             break
         print(data)
 client.close()

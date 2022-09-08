@@ -24,12 +24,12 @@ def password_cracker():
                 hash_word = hashlib.md5(enc_word.strip())
                 digest = hash_word.hexdigest()  # digesting that hash into a hexadecimal value
                 if digest == input_hash:
-                    print("Password found.\nThe password is:", word)  # comparing hashes
+                    print(f"Password found.\nThe password is: {word}")  # comparing hashes
                     pass_found = 1
                     break
 
             if not pass_found:
-                print("Password is not found in the", pass_doc, "file")
+                print(f"Password is not found in the {pass_doc} file")
                 print('\n')
 
             print("*****************  Thank you  **********************")
