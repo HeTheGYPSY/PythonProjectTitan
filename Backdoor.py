@@ -70,6 +70,7 @@ try:
             with open("StatusLogs.log", "a") as f:
                 f.write(f"{time.ctime()}: {str(e)}")
                 f.write('\n')
+            sys.stdout.write("Connection reset!")
             sock.send("An error has occurred: {}".format(str(e)).encode())
 except Exception as err:
     with open("ProgramLogs.log", "a") as file:

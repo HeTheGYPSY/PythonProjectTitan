@@ -4,6 +4,7 @@ from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
+
 print("--MAKE SURE YOUR E-MAIL ACCOUNT DOES NOT REQUIRE TWO-FACTOR AUTHENTICATION!--")
 # initialize connection to our email server
 email = str(input("Enter your email address: "))
@@ -59,14 +60,14 @@ def message(img=None, attachment=None):
             file['Content-Disposition'] = f'attachment; \
             filename="{os.path.basename(one_attachment)}"'
     msg.attach(file)  # At last, Add the attachment to our message object
-    return msg
+
+    try:
+        for address in to:  # Provide some data to the sendmail function!
+            smtp.sendmail(from_addr=email, to_addrs=address, msg=msg)
+    except Exception as e:
+        print(e)
+    finally:
+        smtp.quit()  # Finally, don't forget to close the connection
 
 
 message()
-try:
-    for address in to:  # Provide some data to the sendmail function!
-        smtp.sendmail(from_addr=email, to_addrs=address, msg=msg)
-except Exception as e:
-    print(e)
-finally:
-    smtp.quit()  # Finally, don't forget to close the connection
