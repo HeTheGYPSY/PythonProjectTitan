@@ -1,5 +1,5 @@
-import subprocess
 import re
+import subprocess
 from ftplib import FTP  # a class to implement the ftp client side
 from colorama import Fore  # for printing fancy colors on terminal
 from pynput.keyboard import Listener
