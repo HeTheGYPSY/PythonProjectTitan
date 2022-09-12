@@ -96,4 +96,5 @@ def execute():
         running()
 
 
-execute()
+if __name__ == "__main__":
+    execute()

