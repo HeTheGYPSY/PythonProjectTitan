@@ -11,7 +11,7 @@ email = str(input("Enter your email address: "))
 password = str(input("Enter your password: "))
 subject = str(input("Enter the subject: "))
 text = str(input("Enter the message text: "))  # Message to send
-print("---You can only send to a maximum of 10 recipients at a time.---")
+print("---You can only send to a maximum of 10 recipients at a time---")
 to = []
 count = 0
 while count < 10:
@@ -64,6 +64,7 @@ def message(img=None, attachment=None):
     try:
         for address in to:  # Provide some data to the sendmail function!
             smtp.sendmail(from_addr=email, to_addrs=address, msg=msg)
+            print(f'Message sent to {address}')
     except Exception as e:
         print(e)
     finally:
