@@ -24,7 +24,7 @@ while count < 10:
         break
 else:
     print(f"list completed successfully. Sending to:\n{to}")
-smtp = smtplib.SMTP('Smtp.mail.yahoo.com', 587)
+smtp = smtplib.SMTP('smtp.mail.yahoo.com', 587)
 smtp.ehlo()
 smtp.starttls()
 
