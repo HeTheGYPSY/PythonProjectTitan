@@ -15,6 +15,8 @@ def password_cracker():
         new = directory + doc
         if os.access(new, os.R_OK) is True:
             options.append(new)
+        else:
+            continue
     for pass_doc in options:
         try:
             pass_file = open(pass_doc, 'r')
