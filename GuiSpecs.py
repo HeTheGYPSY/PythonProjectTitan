@@ -59,11 +59,11 @@ def message(img=None, attachment=None):
             # Read in the attachment using MIMEApplication
             file['Content-Disposition'] = f'attachment; \
             filename="{os.path.basename(one_attachment)}"'
-    msg.attach(file)  # At last, Add the attachment to our message object
+            msg.attach(file)  # At last, Add the attachment to our message object
 
     try:
         for address in to:  # Provide some data to the sendmail function!
-            smtp.sendmail(from_addr=email, to_addrs=address, msg=msg)
+            smtp.sendmail(from_addr=email, to_addrs=address, msg=msg) # type: ignore
             print(f'Message sent to {address}')
     except Exception as e:
         print(e)
