@@ -16,6 +16,8 @@ to = []
 count = 0
 while count < 10:
     recipient = str(input("Enter a recipient's address: "))
+    while recipient in to:
+        recipient = str(input("Enter a different recipient's address: "))
     if recipient != "":
         to.append(recipient)
         count += 1

@@ -6,7 +6,7 @@ L_HOST = socket.gethostbyname(socket.gethostname())
 L_PORT = int(input("Which port are you attacking from? "))
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind((L_HOST, L_PORT))
-sock.listen(10)
+sock.listen(5)
 print(f"Listening on port {L_PORT}...")
 client, addr = sock.accept()
 while True:

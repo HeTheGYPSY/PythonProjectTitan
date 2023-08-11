@@ -20,13 +20,14 @@ def password_cracker():
     for pass_doc in options:
         try:
             pass_file = open(pass_doc, 'r')
-
-            for word in pass_file:  # comparing the input_hash with the hashes of the words in password file
+            # comparing the input_hash with the hashes of the words in password file
+            for word in pass_file:
                 enc_word = word.encode('utf-8')
                 hash_word = hashlib.md5(enc_word.strip())
-                digest = hash_word.hexdigest()  # digesting that hash into a hexadecimal value
+                # digesting that hash into a hexadecimal value
+                digest = hash_word.hexdigest()
                 if digest == input_hash:
-                    print(f"Password found.\nThe password is: {word}")  # comparing hashes
+                    print(f"Password found.\nThe password is: {word}") # comparing hashes
                     pass_found = 1
                     break
 
